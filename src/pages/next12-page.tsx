@@ -14,7 +14,7 @@ export default function Next12Page() {
     <>
       <h1>Page Router Test</h1>
       <h3>API Routes Response: {JSON.stringify(data)} </h3>
-      <Link href="/">Go to Home</Link>
+      <Link href="/">Go to App Router: Home</Link>
     </>
   );
 }

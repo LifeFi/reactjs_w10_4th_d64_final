@@ -2,7 +2,7 @@ import { NextRequest } from "next/server";
 import db from "@/lib/db";
 
 export async function POST(request: NextRequest) {
-  const { name, email } = await request.json();
+  const { username, email } = await request.json();
   // console.log("@server | create-account.ts | POST | request.body", request);
 
   const foundUser = await db.user.findUnique({
@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
   }
   await db.user.create({
     data: {
-      name,
+      username,
       email,
     },
   });

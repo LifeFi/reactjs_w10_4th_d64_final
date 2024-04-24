@@ -12,8 +12,27 @@ datasource db {
 
 model User {
   id        Int      @id @default(autoincrement())
-  name      String
+  username  String   @unique
   email     String   @unique
+  password  String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  Tweet     Tweet[]
+}
+
+model Tweet {
+  id            Int      @id @default(autoincrement())
+  content       String
+  // Array 를 JSON.Stringify, parse 직렬화/역직렬화 하여 사용 
+  // sqilte 에서 String[] 지원 X => Json 가능.
+  // Prisma 에서 Json 지원 X
+  // model Photo 를 만드는 것도 가능하나, 이번에는 String 으로 처리
+  photos        String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId        Int
+  parentTweet   Tweet?   @relation("TweetToTweet", fields: [parentTweetId], references: [id], onDelete: Cascade)
+  parentTweetId Int?
+  comments      Tweet[]  @relation("TweetToTweet")
 }

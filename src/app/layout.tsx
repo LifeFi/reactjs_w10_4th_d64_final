@@ -28,7 +28,7 @@ export default function RootLayout({
     // layout 은 SC 여야 하기에, SWRProvider를 CC 로 만들어서 가져옴
     <SWRProvider>
       <html lang="en">
-        <body className={inter.className}>
+        <body className={`${inter.className} max-w-screen-sm mx-auto`}>
           {children}
           <Nav />
         </body>

@@ -6,14 +6,17 @@ const nextConfig = {
       fullUrl: true,
     },
   },
-  // images: {
-  //   remotePatterns: [
-  //     {
-  //       protocol: "https",
-  //       hostname: '"storage.googleapis.com"',
-  //     },
-  //   ],
-  // },
+  images: {
+    remotePatterns: [
+      {
+        hostname: "imagedelivery.net",
+      },
+      // {
+      //   protocol: "https",
+      //   hostname: '"storage.googleapis.com"',
+      // },
+    ],
+  },
 };
 
 export default nextConfig;
