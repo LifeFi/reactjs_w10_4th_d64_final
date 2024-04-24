@@ -16,7 +16,7 @@ declare module "iron-session" {
 }
 
 const sessionOptions = {
-  cookieName: "carrotsession",
+  cookieName: "AI-in-X Clone",
   password: process.env.COOKIE_PASSWORD!,
   cookieOptions: {
     secure: process.env.NODE_ENV === "production",
