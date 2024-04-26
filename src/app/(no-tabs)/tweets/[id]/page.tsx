@@ -6,6 +6,7 @@ import db from "@/lib/db";
 import { EllipsisHorizontalIcon } from "@heroicons/react/24/outline";
 import { unstable_cache as nextCache } from "next/cache";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
 async function getTweet(id: number) {
   const tweet = await db.tweet.findUnique({
@@ -27,13 +28,19 @@ async function getTweet(id: number) {
       },
     },
   });
-  return tweet;
+  if (tweet) {
+    return tweet;
+  }
+  redirect("/404");
 }
 
-const getCachedTweet = nextCache(getTweet, ["tweet-detail"], {
-  tags: ["tweet-detail"],
-  revalidate: 60,
-});
+function getCachedTweet(tweetId: number) {
+  const cachedOperation = nextCache(getTweet, ["tweet-detail"], {
+    tags: [`tweet-detail-${tweetId}`],
+    revalidate: 60,
+  });
+  return cachedOperation(tweetId);
+}
 
 export default async function Tweet({ params }: { params: { id: string } }) {
   const id = Number(params.id);
@@ -66,7 +73,7 @@ export default async function Tweet({ params }: { params: { id: string } }) {
           // <div>{photoUrl}</div>
         ))}
       </div>
-      <LikeComponent tweetId={id} />
+      <LikeComponent tweetId={id} userId={tweet.userId} />
     </div>
   );
 }

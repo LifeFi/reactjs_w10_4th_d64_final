@@ -21,19 +21,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: // test,
-Readonly<{
+}: Readonly<{
   children: React.ReactNode;
-  // test: React.ReactNode;
 }>) {
   return (
     // layout 은 SC 여야 하기에, SWRProvider를 CC 로 만들어서 가져옴
     <SWRProvider>
       <html lang="en">
         <body
-          className={`${inter.className} min-h-screen max-w-screen-sm mx-auto border-x border-gray-200 box-content`}
+          className={`${inter.className} min-h-screen max-w-screen-sm mx-auto border-x border-gray-200 box-content overflow-y-scroll`}
         >
-          {/* {test} */}
           {children}
           {/* <Nav /> */}
         </body>

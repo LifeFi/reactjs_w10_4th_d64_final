@@ -1,8 +1,8 @@
+import { getCachedLikeStatus } from "@/app/(no-tabs)/tweets/actions";
 import LikeButton from "@/components/like-button";
 import db from "@/lib/db";
-import getSession from "@/lib/session";
 import { unstable_cache as nextCache } from "next/cache";
-
+/* 
 function getCachedLikeStatus(tweetId: number, userId: number) {
   const cachedOperation = nextCache(getLikeStatus, ["tweet-like-status"], {
     tags: [`tweet-like-status-${tweetId}`],
@@ -17,7 +17,7 @@ async function getLikeStatus(tweetId: number, userId: number) {
     where: {
       id: {
         tweetId,
-        userId: userId,
+        userId,
       },
     },
   });
@@ -30,14 +30,16 @@ async function getLikeStatus(tweetId: number, userId: number) {
     likeCount,
     isLiked: Boolean(isLiked),
   };
-}
+} */
 
-export default async function LikeComponent({ tweetId }: { tweetId: number }) {
-  const session = await getSession();
-  const { likeCount, isLiked } = await getCachedLikeStatus(
-    tweetId,
-    session.id!
-  );
+export default async function LikeComponent({
+  tweetId,
+  userId,
+}: {
+  tweetId: number;
+  userId: number;
+}) {
+  const { likeCount, isLiked } = await getCachedLikeStatus(tweetId, userId);
   return (
     <div className="flex flex-col item-center py-4 px-6 gap-4">
       <LikeButton isLiked={isLiked} likeCount={likeCount} tweetId={tweetId} />

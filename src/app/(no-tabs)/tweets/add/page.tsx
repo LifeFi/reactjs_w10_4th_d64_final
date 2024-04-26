@@ -208,10 +208,10 @@ export default function Add() {
           accept="image/*"
           className="hidden"
         />
-        <div className="fixed top-2 w-full max-w-screen-sm flex justify-end pr-16">
+        <div className="fixed top-2 left-1/2 -translate-x-1/2 w-full max-w-screen-sm flex justify-end pr-6">
           <FormButton
             text="게시하기"
-            className="w-32 rounded-full  hover:scale-110 active:scale-95 transition"
+            className="w-32 rounded-full hover:scale-110 active:scale-95 transition"
           />
         </div>
       </form>

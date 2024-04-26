@@ -28,12 +28,14 @@ export default function LikeButton({
   );
 
   const onClick = async () => {
+    console.log("likeButton start");
     startTransition(() => reducerFn(undefined));
     if (isLiked) {
       await dislikeTweet(tweetId);
     } else {
       await likeTweet(tweetId);
     }
+    console.log("likeButton end");
   };
   return (
     <div className="flex items-center justify-start">

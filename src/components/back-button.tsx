@@ -7,12 +7,13 @@ export default function BackButton() {
   const router = useRouter();
 
   const onBackCLick = () => {
+    console.log("back!!!!!");
     router.back();
   };
   return (
     <div
       onClick={onBackCLick}
-      className="fixed top-2 ml-2 cursor-pointer rounded-full p-2 hover:bg-slate-200 transition"
+      className="z-10 fixed top-2 ml-2 cursor-pointer rounded-full p-2 hover:bg-slate-200 transition"
     >
       <ArrowLeftIcon className="size-6" />
     </div>

@@ -11,6 +11,9 @@ const nextConfig = {
       {
         hostname: "imagedelivery.net",
       },
+      {
+        hostname: "storage.surfit.io",
+      },
       // {
       //   protocol: "https",
       //   hostname: '"storage.googleapis.com"',
