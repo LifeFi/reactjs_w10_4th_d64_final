@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { TweetType, tweetSchema } from "./schema";
 import TextInput from "@/components/text-input";
+import { useRouter } from "next/navigation";
 
 export default function Add() {
   const [previews, setPreviews] = useState<string[]>([]);
@@ -28,6 +29,7 @@ export default function Add() {
   setValue("photos", "");
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const { onChange, ref } = register("content");
+  const router = useRouter();
 
   const handleResizeHeight = (
     event: React.ChangeEvent<HTMLTextAreaElement>
@@ -125,10 +127,13 @@ export default function Add() {
     // formData.append("photos", "포토 리스트");
     // console.log("formData.content", formData.getAll("content"));
     // console.log("formData.photos", formData.getAll("photos"));
-    const errors = await postTweet(formData);
-    if (errors) {
-      console.log("errors", errors);
+    const tweet: any = await postTweet(formData);
+
+    if (tweet instanceof Error) {
+      console.log("errors : ", errors);
       // setError("")
+    } else {
+      router.replace(`/tweets/${tweet.id}`);
     }
   });
 
@@ -139,11 +144,13 @@ export default function Add() {
     // console.log(getValues());
 
     await onSubmit();
+    // console.log("tweet", tweet);
+    // router.replace(`/tweets/${tweet.id}`);
   };
 
   return (
-    <div>
-      <div>Tweet Add</div>
+    <div className="flex flex-col item-center py-4 px-6 gap-4">
+      <div className="flex w-full justify-center">Tweet Add</div>
       <form action={onValid} className="flex flex-col">
         {previews.length > 0 ? (
           <div className="flex overflow-x-scroll gap-1 transition">
@@ -186,7 +193,7 @@ export default function Add() {
           }}
           placeholder="무슨 일이 일어나고 있나요?"
           required
-          className="overflow-y-hidden "
+          className="border-none min-h-28 rounded-md my-2"
         />
 
         <label htmlFor="photos">
@@ -201,7 +208,12 @@ export default function Add() {
           accept="image/*"
           className="hidden"
         />
-        <FormButton text="게시하기" />
+        <div className="fixed top-2 w-full max-w-screen-sm flex justify-end pr-16">
+          <FormButton
+            text="게시하기"
+            className="w-32 rounded-full  hover:scale-110 active:scale-95 transition"
+          />
+        </div>
       </form>
     </div>
   );

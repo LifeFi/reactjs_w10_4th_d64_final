@@ -31,19 +31,20 @@ declare global {
 
 // sqlite 에서도 의미가 있는지는 체크 필요
 const db = global.db || new PrismaClient();
+// const db = global.db || new PrismaClient({ log: ["query"] });
 console.log(
-  `${CL_BGYELLOW}==================================== @ ${WHERE_FILE} | mode:`,
+  `${CL_BGYELLOW}============================ @ ${WHERE_FILE} | mode:`,
   process.env.NODE_ENV,
 
   `${CL_RESET}`
 );
 console.log(
-  `==================================== @lib/db.ts | db exists:`,
+  `============================ @lib/db.ts | db exists:`,
   Boolean(db)
 );
 
 console.log(
-  `==================================== @lib/db.ts | global.db exists:`,
+  `============================ @lib/db.ts | global.db exists:`,
   Boolean(global.db)
 );
 // 쿼리시 콘솔에 로그 남기는 옵션

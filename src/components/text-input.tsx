@@ -15,7 +15,12 @@ function _TextInput(
 ) {
   return (
     <div className="flex flex-col gap-2">
-      <textarea ref={ref} name={name} {...rest} className="overflow-y-hidden" />
+      <textarea
+        ref={ref}
+        name={name}
+        {...rest}
+        className={`${rest.className} overflow-y-hidden`}
+      />
       {errors.map((error, index) => (
         <span key={index}>{error}</span>
       ))}

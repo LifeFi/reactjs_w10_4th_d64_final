@@ -29,23 +29,28 @@ export async function postTweet(formData: FormData) {
   if (!result.success) {
     return result.error.flatten();
   } else {
-    const session = await getSession();
-    if (session.id) {
-      const tweet = await db.tweet.create({
-        data: {
-          content: result.data.content,
-          photos: result.data.photos,
-          user: {
-            connect: {
-              id: session.id,
+    try {
+      const session = await getSession();
+      if (session.id) {
+        const tweet = await db.tweet.create({
+          data: {
+            content: result.data.content,
+            photos: result.data.photos,
+            user: {
+              connect: {
+                id: session.id,
+              },
             },
           },
-        },
-        select: {
-          id: true,
-        },
-      });
-      redirect(`/tweets/${tweet.id}`);
+          select: {
+            id: true,
+          },
+        });
+        // redirect(`/tweets/${tweet.id}`);
+        return tweet;
+      }
+    } catch (e) {
+      return e;
     }
   }
 }

@@ -2,7 +2,7 @@ import Spinner from "@/components/spinner";
 
 export default function Loading() {
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
+    <div className="flex justify-center items-center pt-40">
       <Spinner size="35px" />
     </div>
   );

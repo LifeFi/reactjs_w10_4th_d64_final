@@ -14,10 +14,14 @@ model User {
   id        Int      @id @default(autoincrement())
   username  String   @unique
   email     String   @unique
+  avatar    String?
+  cover     String?
+  bio       String?
   password  String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  Tweet     Tweet[]
+  tweets    Tweet[]
+  likes     Like[]
 }
 
 model Tweet {
@@ -35,4 +39,17 @@ model Tweet {
   parentTweet   Tweet?   @relation("TweetToTweet", fields: [parentTweetId], references: [id], onDelete: Cascade)
   parentTweetId Int?
   comments      Tweet[]  @relation("TweetToTweet")
+  likes         Like[]
+}
+
+model Like {
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user    User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tweet   Tweet @relation(fields: [tweetId], references: [id], onDelete: Cascade)
+  userId  Int
+  tweetId Int
+
+  @@id(name: "id", [userId, tweetId])
 }
