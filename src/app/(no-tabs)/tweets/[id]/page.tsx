@@ -51,7 +51,7 @@ export default async function Tweet({ params }: { params: { id: string } }) {
 
   return (
     <div className="flex flex-col item-center py-4 px-6 gap-4">
-      <div className="flex justify-center w-full">Tweet Detail: {id}</div>
+      <div className="flex justify-center w-full h-7"></div>
       <div className="flex gap-2">
         <AvatarCircle avatarUrl="" />
         <span className="font-semibold">{tweet?.user.username}</span>
