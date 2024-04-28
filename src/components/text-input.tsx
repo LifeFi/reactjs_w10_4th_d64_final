@@ -11,7 +11,7 @@ function _TextInput(
     name,
     displayName,
     errors = [],
-    ...rest
+    ...res
   }: InputProps & TextareaHTMLAttributes<HTMLTextAreaElement>,
   ref: ForwardedRef<HTMLTextAreaElement>
 ) {
@@ -21,10 +21,10 @@ function _TextInput(
         id={name}
         ref={ref}
         name={name}
-        {...rest}
-        className={`${rest.className} ${
+        {...res}
+        className={`${res.className} peer overflow-y-hidden ${
           displayName && "pt-8"
-        } peer overflow-y-hidden`}
+        } `}
       />
       {displayName && (
         <label

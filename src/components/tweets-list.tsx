@@ -1,8 +1,13 @@
 "use client";
-import { InitialTweets, getMoreTweets } from "@/app/(tabs)/home/actions";
+import {
+  GetMoreTweetsOptionsProps,
+  InitialTweets,
+  getMoreTweets,
+} from "@/app/(tabs)/home/actions";
 import AvatarCircle from "@/components/avatar-circle";
-import LikeComponent from "@/components/like2-component";
-import { EllipsisHorizontalIcon, HeartIcon } from "@heroicons/react/24/outline";
+import LikeComponent from "@/components/like-client-component";
+import useUser from "@/lib/useUser";
+import { EllipsisHorizontalIcon } from "@heroicons/react/24/outline";
 import { ChatBubbleOvalLeftIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,26 +15,30 @@ import { useEffect, useRef, useState } from "react";
 
 interface TweetsProps {
   initialTweets: InitialTweets;
+  options?: GetMoreTweetsOptionsProps;
 }
 
-export default function TweetsList({ initialTweets }: TweetsProps) {
+export default function TweetsList({ initialTweets, options }: TweetsProps) {
+  // const { userId, filter } = options || {};
   const [tweets, setTweets] = useState(initialTweets);
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(0);
   const [isLastPage, setIsLastPage] = useState(false);
-  const trigger = useRef<HTMLSpanElement>(null);
+  const laodMore = useRef<HTMLSpanElement>(null);
+  const { user, isLoading: isUserLoading } = useUser();
 
   useEffect(() => {
+    const currentLoadMore = laodMore.current;
     const observer = new IntersectionObserver(
       async (
         entries: IntersectionObserverEntry[],
         observer: IntersectionObserver
       ) => {
         const element = entries[0];
-        if (element.isIntersecting && trigger.current) {
-          observer.unobserve(trigger.current);
+        if (element.isIntersecting && laodMore.current) {
+          observer.unobserve(laodMore.current);
           setIsLoading(true);
-          const newTweets = await getMoreTweets(page + 1);
+          const newTweets = await getMoreTweets(page + 1, options);
           if (newTweets.length !== 0) {
             setTweets((prev) => [...prev, ...newTweets]);
             setPage((prev) => prev + 1);
@@ -43,13 +52,17 @@ export default function TweetsList({ initialTweets }: TweetsProps) {
         threshold: 1.0,
       }
     );
-    if (trigger.current) {
-      observer.observe(trigger.current);
+    if (currentLoadMore) {
+      observer.observe(currentLoadMore);
     }
     return () => {
-      observer.disconnect();
+      if (currentLoadMore) {
+        // 전체 observer 모두 없애고 싶을 때.
+        // observer.disconnect();
+        observer.unobserve(currentLoadMore);
+      }
     };
-  }, [page]);
+  }, [page, laodMore, options]);
 
   return (
     <div className="flex flex-col mb-20">
@@ -59,17 +72,32 @@ export default function TweetsList({ initialTweets }: TweetsProps) {
           className="border-b px-2 py-4 last:border-none trantition hover:bg-neutral-100"
         >
           <div className="flex gap-2">
-            <AvatarCircle avatarUrl={tweet.user.avatar} />
+            <Link
+              href={`/profile/${tweet.user.id}`}
+              className="hover:underline"
+            >
+              <AvatarCircle
+                avatarUrl={tweet.user.avatar}
+                className="hover:scale-110 transition"
+              />
+            </Link>
 
             <div className="flex flex-col w-full">
               <div className="flex gap-5">
-                <span className="font-semibold">{tweet.user.username}</span>
+                <Link
+                  href={`/profile/${tweet.user.id}`}
+                  className="hover:underline "
+                >
+                  <span className="font-semibold">{tweet.user.username}</span>
+                </Link>
                 <span>{tweet.createdAt.toLocaleDateString()}</span>
                 <div className="flex-grow"></div>
                 <EllipsisHorizontalIcon className="size-8 text-neutral-500 rounded-full hover:bg-neutral-200 p-1 cursor-pointer" />
               </div>
               <Link href={`/tweets/${tweet.id}`} className="hover:underline">
-                <span className="flex w-full min-h-10">{tweet.content}</span>
+                <span className="flex w-full min-h-10 whitespace-pre-wrap">
+                  {tweet.content}
+                </span>
                 <div className="flex overflow-x-scroll gap-1 transition">
                   {JSON.parse(tweet?.photos ?? "[]").map((photoUrl: string) => (
                     <Image
@@ -90,21 +118,23 @@ export default function TweetsList({ initialTweets }: TweetsProps) {
                   <span className="mx-1">3</span>
                 </div>
                 <div>
-                  <LikeComponent tweetId={tweet.id} userId={tweet.userId} />
+                  {user && (
+                    <LikeComponent tweetId={tweet.id} userId={user.id} />
+                  )}
                 </div>
               </div>
             </div>
           </div>
         </div>
       ))}
-      {/* {!isLastPage ? (
+      {!isLastPage ? (
         <span
-          ref={trigger}
-          className="text-sm font-semibold bg-orange-500 w-fit mx-auto px-3 py-2 rounded-md hover:opacity-90 active:scale-95"
+          ref={laodMore}
+          className="text-sm text-neutral-400 bg-transparent  w-fit mx-auto px-3 py-2 rounded-md hover:opacity-90 active:scale-95"
         >
-          {isLoading ? "로딩 중" : "Load more"}
+          {isLoading ? "로딩..." : "더보기"}
         </span>
-      ) : null} */}
+      ) : null}
     </div>
   );
 }

@@ -1,5 +1,5 @@
 .spinner {
-  --border-color: rgba(0, 0, 0, 0.2);
+  --border-color: rgb(0, 0, 0, 0.2);
   --border-top-color: black;
   --size: 25px;
   height: var(--size);

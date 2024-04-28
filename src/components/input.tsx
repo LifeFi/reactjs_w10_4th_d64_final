@@ -11,7 +11,7 @@ function _Input(
     name,
     displayName,
     errors = [],
-    ...rest
+    ...res
   }: InputProps & InputHTMLAttributes<HTMLInputElement>,
   ref: ForwardedRef<HTMLInputElement>
 ) {
@@ -21,8 +21,8 @@ function _Input(
         id={name}
         ref={ref}
         name={name}
-        {...rest}
-        className={`${displayName && "pt-8"} peer *:text-lg`}
+        {...res}
+        className={`${displayName && "pt-8"} peer *:text-lg ${res.className}`}
       />
       {displayName && (
         <label

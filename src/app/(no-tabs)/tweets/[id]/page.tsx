@@ -1,7 +1,7 @@
 import NotFound from "@/app/not-found";
 import AvatarCircle from "@/components/avatar-circle";
-import LikeButton from "@/components/like-button";
-import LikeComponent from "@/components/like-component";
+import LikeButton from "@/components/like-button-old";
+import LikeComponent from "@/components/like-client-component";
 import db from "@/lib/db";
 import { EllipsisHorizontalIcon } from "@heroicons/react/24/outline";
 import { unstable_cache as nextCache } from "next/cache";
@@ -58,7 +58,7 @@ export default async function Tweet({ params }: { params: { id: string } }) {
         <div className="flex-grow"></div>
         <EllipsisHorizontalIcon className="size-8 text-neutral-500 rounded-full hover:bg-neutral-200 p-1 cursor-pointer" />
       </div>
-      <span className="">{tweet?.content}</span>
+      <span className="whitespace-pre-wrap">{tweet?.content}</span>
       <div className="flex overflow-x-scroll gap-1 transition">
         {JSON.parse(tweet?.photos ?? "[]").map((photoUrl: string) => (
           <Image
@@ -67,7 +67,7 @@ export default async function Tweet({ params }: { params: { id: string } }) {
             width={640}
             height={640}
             alt={photoUrl}
-            className="size-full aspect-square border-neutral-300 bg-cover rounded-2xl relative"
+            className="size-full border-neutral-300 bg-cover rounded-2xl relative"
           />
 
           // <div>{photoUrl}</div>

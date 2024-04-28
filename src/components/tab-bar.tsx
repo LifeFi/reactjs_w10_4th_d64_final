@@ -19,7 +19,7 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function TabBar() {
+export default function TabBar({ userId }: { userId: number }) {
   const pathname = usePathname();
   console.log(pathname);
 
@@ -53,8 +53,8 @@ export default function TabBar() {
           <OutlineBellIcon className="size-9" />
         )}
       </Link>
-      <Link href="/profile">
-        {pathname === "/profile" ? (
+      <Link href={`/profile/${userId}`}>
+        {pathname === `/profile/${userId}` ? (
           <SolidUserIcon className="size-9" />
         ) : (
           <OutlineUserIcon className="size-9" />

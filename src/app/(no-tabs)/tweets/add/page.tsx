@@ -95,7 +95,7 @@ export default function Add() {
   };
 
   const onSubmit = handleSubmit(async (data: TweetType) => {
-    console.log("handleSubit called!!!!!!!");
+    console.log("handleSubmit called!!!!!!!");
 
     if (photoFiles) {
       const uploadPhotoPromises = photoFiles.map((file, index) => {
@@ -150,7 +150,7 @@ export default function Add() {
 
   return (
     <div className="flex flex-col item-center py-4 px-6 gap-4">
-      <div className="flex w-full justify-center">Tweet Add</div>
+      <div className="flex w-full justify-center min-h-6"></div>
       <form action={onValid} className="flex flex-col">
         {previews.length > 0 ? (
           <div className="flex overflow-x-scroll gap-1 transition">
@@ -197,7 +197,7 @@ export default function Add() {
         />
 
         <label htmlFor="photos">
-          <PhotoIcon className="w-10 cursor-pointer" />
+          <PhotoIcon className="w-12 cursor-pointer text-twitter-blue rounded-full p-2 hover:bg-blue-50" />
         </label>
         <input
           onChange={onImageChange}

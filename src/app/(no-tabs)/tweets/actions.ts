@@ -59,6 +59,7 @@ export async function getLikeStatus(tweetId: number, userId: number) {
       tweetId,
     },
   });
+  console.log(likeCount, isLiked);
   return {
     likeCount,
     isLiked: Boolean(isLiked),

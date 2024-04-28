@@ -1,10 +1,16 @@
 import TabBar from "@/components/tab-bar";
+import getSession from "@/lib/session";
 
-export default function TabLayout({ children }: { children: React.ReactNode }) {
+export default async function TabLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const session = await getSession();
   return (
     <div>
       {children}
-      <TabBar />
+      <TabBar userId={session.id!} />
     </div>
   );
 }

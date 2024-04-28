@@ -4,24 +4,29 @@ import { useState } from "react";
 
 export default function Modal({
   isOpen,
-  // onClose,
+  toggleIsOpen,
   children,
 }: {
   isOpen: boolean;
-  // onClose: () => void;
+  toggleIsOpen: () => void;
   children: React.ReactNode;
 }) {
-  const [selfKill, setSelfKill] = useState(false);
-  if (!isOpen || selfKill) {
+  if (!isOpen) {
     return null;
   }
+  const handleInnerClick = (event: React.MouseEvent<HTMLElement>) => {
+    // 이벤트 전파를 중지하여 바깥쪽 div의 이벤트 핸들러가 호출되지 않도록 함
+    event.stopPropagation();
+  };
 
   return (
     <div
-      onClick={() => setSelfKill(true)}
-      className="fixed z-10 left-0 top-0  h-screen w-screen bg-opacity-60 bg-black"
+      onClick={toggleIsOpen}
+      className="fixed z-10 left-0 top-0 h-screen w-screen bg-opacity-40 bg-black flex flex-justify-center items-center"
     >
-      <div className="flex justify-center items-center h-full">{children}</div>
+      <div onClick={handleInnerClick} className="mx-auto">
+        {children}
+      </div>
     </div>
   );
 }

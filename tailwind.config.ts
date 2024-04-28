@@ -16,6 +16,12 @@ const config: Config = {
       borderRadius: {
         "4xl": "2rem",
       },
+      textColor: {
+        "twitter-blue": "#1F9BF0",
+      },
+      backgroundColor: {
+        "twitter-blue": "#1F9BF0",
+      },
       keyframes: {
         appear: {
           "0%": { transform: "scale(0)", transformOrigin: "center center" },

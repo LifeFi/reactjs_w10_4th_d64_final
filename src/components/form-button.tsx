@@ -9,14 +9,14 @@ interface ButtonProps {
 
 export default function FormButton({
   text,
-  ...rest
+  ...res
 }: ButtonProps & ButtonHTMLAttributes<HTMLButtonElement>) {
   const { pending } = useFormStatus();
   return (
     <button
-      {...rest}
+      {...res}
       disabled={pending}
-      className={`p-2 text-white bg-neutral-800 disabled:be-neutal-400 disabled:cursor-not-allowed ${rest.className}`}
+      className={`p-2 text-white bg-neutral-800 disabled:be-neutal-400 disabled:cursor-not-allowed ${res.className}`}
     >
       {text}
     </button>

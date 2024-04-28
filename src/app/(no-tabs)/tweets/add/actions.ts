@@ -1,9 +1,7 @@
 "use server";
 
 import getSession from "@/lib/session";
-import { z } from "zod";
 import db from "@/lib/db";
-import { redirect } from "next/navigation";
 import { tweetSchema } from "./schema";
 
 export async function getUploadUrl() {

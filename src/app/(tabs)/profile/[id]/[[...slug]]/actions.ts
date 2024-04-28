@@ -15,16 +15,20 @@ export const logOut = async () => {
   redirect("/");
 };
 
-export async function getUser() {
+export async function getUser(userId?: number) {
   const session = await getSession();
+  const isMe = userId ? session.id === userId : true;
   if (session.id) {
     const user = await db.user.findUnique({
       where: {
-        id: session.id,
+        id: userId || session.id,
       },
     });
     if (user) {
-      return user;
+      return {
+        ...user,
+        isMe,
+      };
     }
   }
   NotFound();
