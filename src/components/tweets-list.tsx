@@ -131,7 +131,7 @@ export default function TweetsList({ initialTweets, options }: TweetsProps) {
       {!isLastPage ? (
         <span
           ref={laodMore}
-          className="text-sm text-neutral-400 bg-transparent  w-fit mx-auto px-3 py-2 rounded-md hover:opacity-90 active:scale-95"
+          className="text-sm text-neutral-400 bg-transparent w-full px-3 py-2 rounded-md hover:opacity-90 active:scale-95"
         >
           {isLoading ? <LoadingTweetSkeleton /> : "더보기"}
         </span>
