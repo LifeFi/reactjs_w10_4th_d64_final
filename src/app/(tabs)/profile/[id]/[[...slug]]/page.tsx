@@ -12,6 +12,7 @@ import {
   GetMoreTweetsOptionsProps,
   getMoreTweets,
 } from "../../../home/actions";
+import ProfileLoading from "./loading";
 
 export default async function Profile({
   params: { id, slug },

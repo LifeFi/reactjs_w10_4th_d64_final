@@ -16,6 +16,7 @@ export const logOut = async () => {
 };
 
 export async function getUser(userId?: number) {
+  await new Promise((r) => setTimeout(r, 2000));
   const session = await getSession();
   const isMe = userId ? session.id === userId : true;
   if (session.id) {

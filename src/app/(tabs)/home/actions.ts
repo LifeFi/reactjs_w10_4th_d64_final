@@ -14,6 +14,7 @@ export async function getMoreTweets(
   page: number,
   options: GetMoreTweetsOptionsProps = { filter: "all" }
 ) {
+  // await new Promise((r) => setTimeout(r, 2000));
   const { userId, filter } = options;
   const tweets = await db.tweet.findMany({
     where: {
