@@ -58,7 +58,9 @@ export default function ProfileEdit() {
     if (success) {
       const { id, uploadURL } = result;
       setUploadAvatarUrl(uploadURL);
-      setAvatarUrl(`https://imagedelivery.net/OBj4-AubflPByVfhX39jxA/${id}`);
+      setAvatarUrl(
+        `${process.env.NEXT_PUBLIC_CLOUDFLARE_IMAGE_DELIVERY_URL}/${id}`
+      );
     }
   };
 
@@ -80,7 +82,9 @@ export default function ProfileEdit() {
     if (success) {
       const { id, uploadURL } = result;
       setUploadCoverUrl(uploadURL);
-      setCoverUrl(`https://imagedelivery.net/OBj4-AubflPByVfhX39jxA/${id}`);
+      setCoverUrl(
+        `${process.env.NEXT_PUBLIC_CLOUDFLARE_IMAGE_DELIVERY_URL}/${id}`
+      );
     }
   };
 

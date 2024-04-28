@@ -65,7 +65,7 @@ export default function Add() {
           const { id, uploadURL } = result;
           uploadUrls.push(uploadURL);
           downloadUrls.push(
-            `https://imagedelivery.net/OBj4-AubflPByVfhX39jxA/${id}`
+            `${process.env.NEXT_PUBLIC_CLOUDFLARE_IMAGE_DELIVERY_URL}/${id}`
           );
         }
       });
