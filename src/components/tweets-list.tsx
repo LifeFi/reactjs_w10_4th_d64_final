@@ -12,6 +12,7 @@ import { ChatBubbleOvalLeftIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import LoadingTweetSkeleton from "./loading-tweet-skeleton";
 
 interface TweetsProps {
   initialTweets: InitialTweets;
@@ -132,7 +133,7 @@ export default function TweetsList({ initialTweets, options }: TweetsProps) {
           ref={laodMore}
           className="text-sm text-neutral-400 bg-transparent  w-fit mx-auto px-3 py-2 rounded-md hover:opacity-90 active:scale-95"
         >
-          {isLoading ? "로딩..." : "더보기"}
+          {isLoading ? <LoadingTweetSkeleton /> : "더보기"}
         </span>
       ) : null}
     </div>
