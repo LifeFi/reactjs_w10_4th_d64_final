@@ -13,10 +13,10 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | AI in X Clone",
-    default: "AI in X Clone",
+    template: "%s | OX in X",
+    default: "OX in X",
   },
-  description: "I'm in!",
+  description: "Truth or Fake",
 };
 
 export default function RootLayout({
