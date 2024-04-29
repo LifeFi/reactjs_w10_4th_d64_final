@@ -55,10 +55,10 @@ export default async function Home() {
 
         <TweetsList initialTweets={initialTweets} />
 
-        <div className="fixed bottom-16 w-full max-w-screen-sm  flex justify-end">
+        <div className="fixed bottom-[70px] w-full max-w-screen-sm  flex justify-end">
           <Link
             href="/tweets/add"
-            className="mr-10 bg-white rounded-full hover:scale-110  active:scale-95 transition"
+            className="mr-4 bg-white rounded-full hover:scale-110  active:scale-95 transition"
           >
             <PlusCircleIcon className="size-14" />
           </Link>
