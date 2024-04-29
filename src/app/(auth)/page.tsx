@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-
+import logoImg from "/public/ox-logo.png";
 export default function Home() {
   return (
     <>
-      <Image src="/ox-logo.png" alt="ox-logo.png" width={80} height={80} />
+      <Image src={logoImg} alt="ox-logo.png" width={80} height={80} />
       <div className="flex flex-col px-6 gap-2">
         <div className="mt-12 text-6xl font-bold">지금 일어나고 있는 OX</div>
         <div className="mt-12 text-6xl font-bold text-twitter-blue">

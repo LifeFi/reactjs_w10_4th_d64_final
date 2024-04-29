@@ -1,11 +1,9 @@
 import AvatarCircle from "@/components/avatar-circle";
-import LikeComponent from "@/components/like-server-component";
 import { PlusCircleIcon } from "@heroicons/react/16/solid";
 import Image from "next/image";
 import Link from "next/link";
 import { getMoreTweets, revalidateHome } from "./actions";
 import TweetsList from "@/components/tweets-list";
-import getSession from "@/lib/session";
 import { getUser } from "../profile/[id]/[[...slug]]/actions";
 import ModalButton from "@/components/modal-button";
 import {
@@ -13,8 +11,7 @@ import {
   Cog6ToothIcon,
 } from "@heroicons/react/24/outline";
 import LogoutButton from "@/components/logout-button";
-import { revalidatePath } from "next/cache";
-import HomeLoading from "./loading";
+import logoImg from "/public/ox-logo.png";
 
 export default async function Home() {
   const initialTweets = await getMoreTweets(0);
@@ -26,12 +23,7 @@ export default async function Home() {
         <div className="flex justify-center relative">
           <form action={revalidateHome}>
             <button className="hover:bg-blue-50 rounded-full transition">
-              <Image
-                src="/ox-logo.png"
-                alt="ox-logo.png"
-                width={80}
-                height={80}
-              />
+              <Image src={logoImg} alt="ox-logo.png" width={80} height={80} />
             </button>
           </form>
 

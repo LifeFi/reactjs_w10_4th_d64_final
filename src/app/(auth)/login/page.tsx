@@ -6,19 +6,20 @@ import FormButton from "@/components/form-button";
 import Image from "next/image";
 import Link from "next/link";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import logoImg from "/public/ox-logo.png";
 
 export default function Login() {
   const [state, dispatch] = useFormState(login, null);
   return (
-    <div className="flex flex-col py-8 px-20 gap-4 relative">
+    <div className="flex flex-col py-8 px-10 gap-4 relative">
       <Image
-        src="/ox-logo.png"
+        src={logoImg}
         alt="ox-logo.png"
         width={80}
         height={80}
         className="mx-auto"
       />
-      <Link href="/" className="size-6 absolute left-14 top-16 ">
+      <Link href="/" className="size-6 absolute left-6 top-16 ">
         <XMarkIcon />
       </Link>
       <div className="text-3xl font-bold">

@@ -1,11 +1,11 @@
 import NotFound from "@/app/not-found";
 import AvatarCircle from "@/components/avatar-circle";
-import LikeButton from "@/components/like-button-old";
 import LikeComponent from "@/components/like-client-component";
 import db from "@/lib/db";
 import { EllipsisHorizontalIcon } from "@heroicons/react/24/outline";
 import { unstable_cache as nextCache } from "next/cache";
 import Image from "next/image";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 async function getTweet(id: number) {
@@ -16,6 +16,7 @@ async function getTweet(id: number) {
     include: {
       user: {
         select: {
+          id: true,
           username: true,
           avatar: true,
         },
@@ -53,8 +54,17 @@ export default async function Tweet({ params }: { params: { id: string } }) {
     <div className="flex flex-col item-center py-4 px-6 gap-4">
       <div className="flex justify-center w-full h-7"></div>
       <div className="flex gap-2">
-        <AvatarCircle avatarUrl="" />
-        <span className="font-semibold">{tweet?.user.username}</span>
+        <Link
+          href={`/profile/${tweet.user.id}`}
+          className="hover:underline flex gap-2"
+        >
+          <AvatarCircle
+            avatarUrl={tweet.user.avatar}
+            className="hover:scale-110 transition"
+          />
+          <span className="font-semibold">{tweet?.user.username}</span>
+        </Link>
+
         <div className="flex-grow"></div>
         <EllipsisHorizontalIcon className="size-8 text-neutral-500 rounded-full hover:bg-neutral-200 p-1 cursor-pointer" />
       </div>
