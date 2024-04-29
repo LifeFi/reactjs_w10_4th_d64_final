@@ -13,8 +13,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | OX in X",
-    default: "OX in X",
+    template: "%s | OX in X Clone",
+    default: "OX in X Clone",
   },
   description: "Truth or Fake",
 };
