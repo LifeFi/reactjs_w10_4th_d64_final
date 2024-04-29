@@ -16,7 +16,7 @@ function _TextInput(
   ref: ForwardedRef<HTMLTextAreaElement>
 ) {
   return (
-    <div className="flex flex-col gap-2 relative">
+    <div className="flex flex-col gap-2 relative w-full">
       <textarea
         id={name}
         ref={ref}
@@ -35,7 +35,9 @@ function _TextInput(
         </label>
       )}
       {errors.map((error, index) => (
-        <span key={index}>{error}</span>
+        <span key={index} className="text-red-500">
+          {error}
+        </span>
       ))}
     </div>
   );

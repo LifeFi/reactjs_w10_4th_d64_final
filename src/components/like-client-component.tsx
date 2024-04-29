@@ -21,10 +21,10 @@ export default function LikeComponent({
         likeCount,
         isLiked,
       });
-      console.log("SetLikeState ================", { likeCount, isLiked });
+      // console.log("SetLikeState ================", { likeCount, isLiked });
     };
     fetchLikeStatus();
-  }, []);
+  }, [tweetId, userId]);
 
   return (
     <div className="flex flex-col item-center py-4 px-6 gap-4">

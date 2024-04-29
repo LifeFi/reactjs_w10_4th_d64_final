@@ -33,7 +33,9 @@ function _Input(
         </label>
       )}
       {errors.map((error, index) => (
-        <span key={index}>{error}</span>
+        <span key={index} className="text-red-500">
+          {error}
+        </span>
       ))}
     </div>
   );

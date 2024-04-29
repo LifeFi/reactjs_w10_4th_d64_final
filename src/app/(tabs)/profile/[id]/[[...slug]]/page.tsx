@@ -12,7 +12,6 @@ import {
   GetMoreTweetsOptionsProps,
   getMoreTweets,
 } from "../../../home/actions";
-import ProfileLoading from "./loading";
 
 export default async function Profile({
   params: { id, slug },
@@ -30,6 +29,7 @@ export default async function Profile({
     filter: tab === "tweets" ? "all" : tab === "replies" ? "replies" : "likes",
   };
   const initialTweets = await getMoreTweets(0, options);
+  console.log("Options: ", options);
 
   return (
     <>

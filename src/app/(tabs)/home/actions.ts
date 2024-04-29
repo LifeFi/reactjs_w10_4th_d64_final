@@ -1,12 +1,13 @@
 "use server";
 
+import { tweetSchema } from "@/app/(no-tabs)/tweets/add/components/schema";
 import db from "@/lib/db";
 import { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
 export interface GetMoreTweetsOptionsProps {
   userId?: number;
-  filter?: "all" | "replies" | "likes";
+  filter?: "all" | "parents" | "replies" | "likes";
 }
 
 // 객체 인자의 초기값을 세팅하는 방법.
@@ -26,13 +27,18 @@ export async function getMoreTweets(
           : undefined
         : undefined,
       AND: [
-        // userId && filter === "replies"
-        //   ? {
-        //       replyTo: {
-        //         not: null,
-        //       },
-        //     }
-        //   : {},
+        filter === "parents"
+          ? {
+              parentTweetId: null,
+            }
+          : {},
+        filter === "replies"
+          ? {
+              NOT: {
+                parentTweetId: null,
+              },
+            }
+          : {},
         filter === "likes"
           ? {
               likes: {
@@ -50,6 +56,12 @@ export async function getMoreTweets(
           id: true,
           username: true,
           avatar: true,
+        },
+      },
+      _count: {
+        select: {
+          replies: true,
+          inReplies: true,
         },
       },
     },

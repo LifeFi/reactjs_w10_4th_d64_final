@@ -32,6 +32,12 @@ declare global {
 // sqlite 에서도 의미가 있는지는 체크 필요
 const db = global.db || new PrismaClient();
 // const db = global.db || new PrismaClient({ log: ["query"] });
+/* new PrismaClient({
+  log: process.env.NODE_ENV === "production" ?
+    [{emit: "stdout", level: "warn"}] :
+    [{emit: "stdout", level: "query"}],
+}); */
+
 console.log(
   `${CL_BGYELLOW}============================ @ ${WHERE_FILE} | mode:`,
   process.env.NODE_ENV,

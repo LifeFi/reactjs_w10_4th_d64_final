@@ -1,10 +1,9 @@
 import LoadingTweetSkeleton from "@/components/loading-tweet-skeleton";
 import { Cog6ToothIcon } from "@heroicons/react/24/outline";
-import Image from "next/image";
 
 export default function ProfileLoading() {
   return (
-    <div className="flex flex-col item-center py-4 gap-4 animate-pulse">
+    <div className="flex flex-col item-center pb-8 gap-4 animate-pulse">
       <div className="h-40 w-full bg-neutral-400 relative">
         <Cog6ToothIcon className=" absolute size-10 right-4 top-4 cursor-pointer bg-neutral-400 hover:bg-neutral-200 rounded-full p-1" />
         <div className="absolute top-28 left-4 rounded-full size-32 p-1 bg-neutral-400 border-[4px] border-white"></div>

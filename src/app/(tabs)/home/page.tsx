@@ -14,7 +14,7 @@ import LogoutButton from "@/components/logout-button";
 import logoImg from "/public/ox-logo.png";
 
 export default async function Home() {
-  const initialTweets = await getMoreTweets(0);
+  const initialTweets = await getMoreTweets(0, { filter: "parents" });
   const user = await getUser();
   console.log(initialTweets);
   return (
@@ -53,7 +53,10 @@ export default async function Home() {
           </ModalButton>
         </div>
 
-        <TweetsList initialTweets={initialTweets} />
+        <TweetsList
+          initialTweets={initialTweets}
+          options={{ filter: "parents" }}
+        />
 
         <div className="fixed bottom-[70px] w-full max-w-screen-sm  flex justify-end">
           <Link
