@@ -63,7 +63,7 @@ export default function CreateAccount() {
         <FormButton
           text="가입하기"
           hasOverlay={true}
-          className="text-lg border rounded-full py-3 mt-5"
+          className="text-lg border rounded-full py-3 mt-5 active:scale-95 hover:scale-105 transition"
         />
       </form>
     </div>

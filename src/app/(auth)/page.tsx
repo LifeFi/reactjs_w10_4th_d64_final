@@ -16,7 +16,7 @@ export default function Home() {
 
         <Link
           href="/create-account"
-          className="rounded-full border border-neutral-300 w-80 p-2 text-lg flex justify-center bg-twitter-blue text-white font-bold"
+          className="rounded-full border border-neutral-300 w-80 p-2 text-lg flex justify-center bg-twitter-blue text-white font-bold hover:bg-blue-600 hover:opacity-95 transition"
         >
           계정 만들기
         </Link>
@@ -25,7 +25,7 @@ export default function Home() {
         </div>
         <Link
           href="/login"
-          className="rounded-full border border-neutral-300 w-80 p-2 text-lg flex justify-center"
+          className="rounded-full border border-neutral-300 w-80 p-2 text-lg text-twitter-blue flex justify-center hover:bg-twitter-blue hover:bg-opacity-10 transition"
         >
           로그인
         </Link>
