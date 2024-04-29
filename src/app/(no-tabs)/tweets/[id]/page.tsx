@@ -72,7 +72,7 @@ export default async function TweetDetail({
         </div>
       </Link>
 
-      <div className="w-full">
+      <div className="w-full px-4">
         {replies.map((reply, index) => (
           <Tweet key={index} tweet={reply} />
         ))}
