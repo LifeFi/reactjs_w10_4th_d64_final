@@ -10,7 +10,7 @@ import { CameraIcon } from "@heroicons/react/24/outline";
 import TextInput from "@/components/text-input";
 import { useFormState } from "react-dom";
 import { updateProfile } from "./actions";
-import { getUploadUrl } from "@/app/(no-tabs)/tweets/add/components/actions";
+import { getUploadUrl } from "@/app/(tabs)/tweets/add/components/actions";
 import Image from "next/image";
 
 export default function ProfileEdit() {
@@ -207,7 +207,7 @@ export default function ProfileEdit() {
             errors={state?.fieldErrors.bio}
           />
 
-          <div className="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-screen-sm flex justify-end pr-6">
+          <div className="absolute -top-14 right-0 pr-6">
             <FormButton
               text="저장"
               hasOverlay={true}

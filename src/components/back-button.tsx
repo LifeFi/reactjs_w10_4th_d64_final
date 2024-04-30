@@ -8,7 +8,12 @@ export default function BackButton() {
 
   const onBackCLick = () => {
     console.log("back!!!!!");
-    router.back();
+
+    if (window.history.length > 1) {
+      router.back();
+    } else {
+      router.push("/home");
+    }
   };
   return (
     <div

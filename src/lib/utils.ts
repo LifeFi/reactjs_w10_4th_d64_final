@@ -16,3 +16,21 @@ export function formatToTimeAgo(date: string): string {
 export function formatToWon(price: number): string {
   return price.toLocaleString("ko-KR");
 }
+
+export function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  const now = new Date();
+  const diff = now.getTime() - date.getTime();
+
+  if (diff < 1000 * 60) {
+    return "방금 전";
+  } else if (diff < 1000 * 60 * 60) {
+    return `${Math.floor(diff / (1000 * 60))}분 전`;
+  } else if (diff < 1000 * 60 * 60 * 24) {
+    return `${Math.floor(diff / (1000 * 60 * 60))}시간 전`;
+  } else if (diff < 1000 * 60 * 60 * 24 * 7) {
+    return `${Math.floor(diff / (1000 * 60 * 60 * 24))}일 전`;
+  } else {
+    return new Date(dateString).toLocaleDateString("ko-KR");
+  }
+}

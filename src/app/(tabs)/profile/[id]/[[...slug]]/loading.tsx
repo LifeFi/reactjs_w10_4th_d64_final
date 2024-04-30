@@ -17,9 +17,11 @@ export default function ProfileLoading() {
         <div>답글</div>
         <div>마음에 들어요</div>
       </div>
-      {[...Array(5)].map((_, index) => (
-        <LoadingTweetSkeleton key={index} />
-      ))}
+      <div className="px-2">
+        {[...Array(5)].map((_, index) => (
+          <LoadingTweetSkeleton key={index} />
+        ))}
+      </div>
     </div>
   );
 }

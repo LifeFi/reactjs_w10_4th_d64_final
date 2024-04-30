@@ -1,5 +1,8 @@
 "use client";
-import { getCachedLikeStatus } from "@/app/(no-tabs)/tweets/actions";
+import {
+  getCachedLikeStatus,
+  getLikeStatus,
+} from "@/app/(tabs)/tweets/actions";
 import LikeButton from "@/components/like-button";
 import { useEffect, useState } from "react";
 
@@ -10,6 +13,8 @@ export default function LikeComponent({
   tweetId: number;
   userId: number;
 }) {
+  // console.log(tweetId, userId);
+
   const [likeState, setLikeState] = useState<{
     likeCount: number;
     isLiked: boolean;
@@ -25,9 +30,10 @@ export default function LikeComponent({
     };
     fetchLikeStatus();
   }, [tweetId, userId]);
+  // console.log("likeState", likeState);
 
   return (
-    <div className="flex flex-col item-center py-4 px-6 gap-4">
+    <div className="flex py-4 px-6">
       {likeState && (
         <LikeButton
           isLiked={likeState.isLiked}

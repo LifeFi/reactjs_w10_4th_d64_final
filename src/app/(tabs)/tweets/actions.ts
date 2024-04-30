@@ -16,17 +16,17 @@ export async function likeTweet(tweetId: number) {
     });
     console.log("likeTweet");
 
-    revalidateTag(`tweet-like-status-${tweetId}`);
+    revalidateTag(`tweet-like-status-${tweetId}-${session.id!}`);
   } catch (e) {
     console.log("likeTweet Error");
-    revalidateTag(`tweet-like-status-${tweetId}`);
+    revalidateTag(`tweet-like-status-${tweetId}-${session.id!}`);
   }
 }
 
 export async function dislikeTweet(tweetId: number) {
   // await new Promise((r) => setTimeout(r, 1000));
+  const session = await getSession();
   try {
-    const session = await getSession();
     await db.like.delete({
       where: {
         id: {
@@ -36,10 +36,10 @@ export async function dislikeTweet(tweetId: number) {
       },
     });
     console.log("dislikeTweet");
-    revalidateTag(`tweet-like-status-${tweetId}`);
+    revalidateTag(`tweet-like-status-${tweetId}-${session.id!}`);
   } catch (e) {
     console.log("dislikeTweet Error");
-    revalidateTag(`tweet-like-status-${tweetId}`);
+    revalidateTag(`tweet-like-status-${tweetId}-${session.id!}`);
   }
 }
 
@@ -69,7 +69,7 @@ export async function getLikeStatus(tweetId: number, userId: number) {
 export async function getCachedLikeStatus(tweetId: number, userId: number) {
   console.log("getCachedLikeStatus called!!!!");
   const cachedOperation = nextCache(getLikeStatus, ["tweet-like-status"], {
-    tags: [`tweet-like-status-${tweetId}`],
+    tags: [`tweet-like-status-${tweetId}`, `${userId}`],
   });
   return cachedOperation(tweetId, userId);
 }

@@ -1,4 +1,4 @@
-import { getCachedLikeStatus } from "@/app/(no-tabs)/tweets/actions";
+import { getCachedLikeStatus } from "@/app/(tabs)/tweets/actions";
 import LikeButton from "@/components/like-button";
 
 export default async function LikeComponent({

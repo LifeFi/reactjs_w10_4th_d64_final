@@ -19,12 +19,12 @@ export default function FormButton({
     <>
       {hasOverlay && pending && (
         <div
-          className="fixed z-30 left-0 top-0 w-full h-screen bg-black bg-opacity-10 flex justify-center items-center "
+          className="fixed z-30 right-0 top-0 w-screen h-screen bg-black bg-opacity-10 flex flex-col justify-start items-center "
           onClick={(event) => {
             event.stopPropagation();
           }}
         >
-          {<Loading />}
+          <Loading />
         </div>
       )}
 

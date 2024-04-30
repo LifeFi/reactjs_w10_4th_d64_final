@@ -26,7 +26,8 @@ export default async function Profile({
   const tab = slug && tabs.includes(slug[0]) ? slug[0] : "tweets";
   const options: GetMoreTweetsOptionsProps = {
     userId,
-    filter: tab === "tweets" ? "all" : tab === "replies" ? "replies" : "likes",
+    filter:
+      tab === "tweets" ? "parents" : tab === "replies" ? "replies" : "likes",
   };
   const initialTweets = await getMoreTweets(0, options);
   console.log("Options: ", options);
@@ -110,7 +111,7 @@ export default async function Profile({
             </Link>
           </div>
 
-          <TweetsList initialTweets={initialTweets} options={options} />
+          <TweetsList initialTweets={initialTweets} queryOptions={options} />
         </div>
       )}
     </>

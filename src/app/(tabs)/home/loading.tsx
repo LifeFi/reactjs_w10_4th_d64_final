@@ -11,11 +11,13 @@ export default function HomeLoading() {
           <Image src={logoImg} alt="ox-logo.png" width={80} height={80} />
         </div>
         <Cog6ToothIcon className=" absolute size-10 right-4 top-4 cursor-pointer bg-neutral-50 hover:bg-neutral-200 rounded-full p-1" />
-        <div className=" absolute size-10 left-3 top-6 cursor-pointer bg-neutral-400 hover:bg-neutral-200 rounded-full p-1" />
+        <div className=" absolute size-10 left-2 top-6 cursor-pointer bg-neutral-400 hover:bg-neutral-200 rounded-full p-1" />
       </div>
-      {[...Array(10)].map((_, index) => (
-        <LoadingTweetSkeleton key={index} />
-      ))}
+      <div className="px-2 mt-3">
+        {[...Array(10)].map((_, index) => (
+          <LoadingTweetSkeleton key={index} />
+        ))}
+      </div>
     </div>
   );
 }

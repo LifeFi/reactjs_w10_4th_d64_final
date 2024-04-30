@@ -7,14 +7,22 @@ import {
 import useUser from "@/lib/useUser";
 import { useEffect, useRef, useState } from "react";
 import LoadingTweetSkeleton from "./loading-tweet-skeleton";
-import Tweet from "./tweet";
+import Tweet from "./tweet-item";
 
 interface TweetsProps {
   initialTweets: InitialTweets;
-  options?: GetMoreTweetsOptionsProps;
+  queryOptions?: GetMoreTweetsOptionsProps;
+  itemOptions?: {
+    displayMode?: "list" | "detail" | "reply";
+    verticalLine?: boolean;
+  };
 }
 
-export default function TweetsList({ initialTweets, options }: TweetsProps) {
+export default function TweetsList({
+  initialTweets,
+  queryOptions,
+  itemOptions,
+}: TweetsProps) {
   // const { userId, filter } = options || {};
   const [tweets, setTweets] = useState(initialTweets);
   const [isLoading, setIsLoading] = useState(false);
@@ -34,7 +42,7 @@ export default function TweetsList({ initialTweets, options }: TweetsProps) {
         if (element.isIntersecting && laodMore.current) {
           observer.unobserve(laodMore.current);
           setIsLoading(true);
-          const newTweets = await getMoreTweets(page + 1, options);
+          const newTweets = await getMoreTweets(page + 1, queryOptions);
           if (newTweets.length !== 0) {
             setTweets((prev) => [...prev, ...newTweets]);
             setPage((prev) => prev + 1);
@@ -58,12 +66,25 @@ export default function TweetsList({ initialTweets, options }: TweetsProps) {
         observer.unobserve(currentLoadMore);
       }
     };
-  }, [page, laodMore, options]);
+  }, [page, laodMore, queryOptions]);
 
   return (
     <div className="flex flex-col mb-20">
-      {tweets.map((tweet) => (
-        <Tweet key={tweet.id} tweet={tweet} user={user} />
+      {tweets.map((tweet, index, array) => (
+        <Tweet
+          key={tweet.id}
+          tweet={tweet}
+          user={user}
+          displayMode={itemOptions?.displayMode}
+          verticalLine={
+            index !== array.length - 1 &&
+            (tweet.id === array[index + 1].inReplyToTweetId ||
+              (tweet.inReplyToTweetId !== null &&
+                tweet.inReplyToTweetId ===
+                  array[index + 1].inReplyToTweetId)) &&
+            itemOptions?.verticalLine
+          }
+        />
       ))}
       {!isLastPage ? (
         <span

@@ -11,7 +11,7 @@ import TextInput from "@/components/text-input";
 import { useRouter } from "next/navigation";
 import AvatarCircle from "@/components/avatar-circle";
 import useUser from "@/lib/useUser";
-import Tweet from "@/components/tweet";
+import Tweet from "@/components/tweet-item";
 import { TweetWithUser } from "../../[id]/actions";
 
 export default function AddTweet({ toTweet }: { toTweet?: TweetWithUser }) {
@@ -135,12 +135,16 @@ export default function AddTweet({ toTweet }: { toTweet?: TweetWithUser }) {
     // console.log("formData.content", formData.getAll("content"));
     // console.log("formData.photos", formData.getAll("photos"));
     const tweet: any = await postTweet(formData);
-
+    console.log("tweet", tweet);
     if (tweet instanceof Error) {
       console.log("errors : ", errors);
       // setError("")
     } else {
-      router.replace(`/tweets/${tweet.id}`);
+      if (tweet.parentTweetId) {
+        router.replace(`/tweets/${tweet.parentTweetId}`);
+      } else {
+        router.replace(`/tweets/${tweet.id}`);
+      }
     }
   });
 
@@ -156,11 +160,16 @@ export default function AddTweet({ toTweet }: { toTweet?: TweetWithUser }) {
   };
 
   return (
-    <div className="flex flex-col item-center py-4 gap-4">
+    <div className="flex flex-col item-center py-4 gap-4 relative">
       <div className="flex w-full justify-center min-h-6"></div>
       {toTweet && (
         <div className="ml-4">
-          <Tweet tweet={toTweet} user={user} shortMode={true} />
+          <Tweet
+            tweet={toTweet}
+            user={user}
+            displayMode={"reply"}
+            verticalLine={true}
+          />
         </div>
       )}
       <form action={onValid} className="flex flex-col ">
@@ -225,7 +234,7 @@ export default function AddTweet({ toTweet }: { toTweet?: TweetWithUser }) {
           accept="image/*"
           className="hidden"
         />
-        <div className="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-screen-sm flex justify-end pr-6">
+        <div className="absolute top-0 right-0 pr-6">
           <FormButton
             text="게시하기"
             hasOverlay={true}

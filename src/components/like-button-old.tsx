@@ -1,7 +1,7 @@
 "use client";
 
 import { useOptimistic, useTransition } from "react";
-import { dislikeTweet, likeTweet } from "@/app/(no-tabs)/tweets/actions";
+import { dislikeTweet, likeTweet } from "@/app/(tabs)/tweets/actions";
 import { HeartIcon as SolidHeartIcon } from "@heroicons/react/24/solid";
 import { HeartIcon as OutlineHeartIcon } from "@heroicons/react/24/outline";
 

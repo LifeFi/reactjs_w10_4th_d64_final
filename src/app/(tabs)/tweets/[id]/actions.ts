@@ -71,6 +71,9 @@ export async function getReplies(id: number) {
         },
       },
     },
+    orderBy: {
+      createdAt: "asc",
+    },
   });
   if (tweets) {
     return tweets;

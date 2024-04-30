@@ -29,7 +29,7 @@ export default async function Home() {
 
           <Link
             href={`/profile/${user?.id}`}
-            className="absolute left-2 top-6  hover:underline "
+            className="absolute left-2 top-6 hover:underline "
           >
             <AvatarCircle
               avatarUrl={user?.avatar}
@@ -55,7 +55,8 @@ export default async function Home() {
 
         <TweetsList
           initialTweets={initialTweets}
-          options={{ filter: "parents" }}
+          queryOptions={{ filter: "parents" }}
+          // itemOptions={{ verticalLine: true }}
         />
 
         <div className="fixed bottom-[70px] w-full max-w-screen-sm  flex justify-end">

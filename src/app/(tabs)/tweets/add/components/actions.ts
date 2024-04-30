@@ -82,6 +82,7 @@ export async function postTweet(formData: FormData) {
           },
           select: {
             id: true,
+            parentTweetId: true,
           },
         });
 

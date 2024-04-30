@@ -1,6 +1,6 @@
 "use server";
 
-import { tweetSchema } from "@/app/(no-tabs)/tweets/add/components/schema";
+import { tweetSchema } from "@/app/(tabs)/tweets/add/components/schema";
 import db from "@/lib/db";
 import { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
@@ -67,6 +67,7 @@ export async function getMoreTweets(
     },
     skip: page * 5,
     take: 5,
+
     orderBy: {
       createdAt: "desc",
     },

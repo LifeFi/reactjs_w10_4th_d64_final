@@ -1,7 +1,7 @@
 "use client";
 
 import { Dispatch, SetStateAction, useOptimistic, useTransition } from "react";
-import { dislikeTweet, likeTweet } from "@/app/(no-tabs)/tweets/actions";
+import { dislikeTweet, likeTweet } from "@/app/(tabs)/tweets/actions";
 import { HeartIcon as SolidHeartIcon } from "@heroicons/react/24/solid";
 import { HeartIcon as OutlineHeartIcon } from "@heroicons/react/24/outline";
 
@@ -38,8 +38,8 @@ export default function LikeButton({
   );
 
   const onClick = async () => {
-    console.log("likeButton start");
-    console.log("state before reduverFn: ", state);
+    // console.log("likeButton start");
+    // console.log("state before reduverFn: ", state);
 
     // reducerFn(undefined);
     startTransition(() => reducerFn(undefined));
@@ -63,8 +63,8 @@ export default function LikeButton({
     <div className="flex items-center justify-start">
       <button
         onClick={onClick}
-        className={`size-10 flex items-center justify-center gap-2 text-neutral-400 text-sm  rounded-full p-1 transition ${
-          state.isLiked ? " text-red-500" : "hover:bg-red-100"
+        className={`size-10 flex items-center justify-center gap-2 text-neutral-400 text-sm rounded-full p-1 transition ${
+          state.isLiked ? "text-red-500" : "hover:bg-red-100"
         }`}
       >
         {state.isLiked ? (
