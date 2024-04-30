@@ -18,7 +18,7 @@ export default function BackButton() {
   return (
     <div
       onClick={onBackCLick}
-      className="z-10 fixed top-2 ml-2 cursor-pointer rounded-full p-2 hover:bg-slate-200 transition"
+      className="z-10 fixed top-2 ml-2 cursor-pointer rounded-full p-2 bg-white bg-opacity-70 hover:bg-slate-200 transition"
     >
       <ArrowLeftIcon className="size-6" />
     </div>
