@@ -1,6 +1,6 @@
 "use client";
 
-import { getLikeStatus } from "./optimistic-actions";
+import { getCachedLikeStatus } from "./optimistic-actions";
 import OptimisticButton from "./optimistic-button";
 import { useEffect, useState } from "react";
 
@@ -14,21 +14,22 @@ export default function Notification() {
   }>({ isLiked: false, likeCount: 0 });
   useEffect(() => {
     console.log("Notification useEffect called!!!!");
-    getLikeStatus().then((status) => {
+    getCachedLikeStatus().then((status) => {
       console.log(status);
       setLikeStatus(status);
     });
-  }, [likeStatus.isLiked]);
+  }, []);
+  console.log("norification called!!!!!");
 
   return (
     <div className="flex flex-col item-center py-8 px-6 gap-4">
       <h1 className="text-2xl">Notification</h1>
       {/* <div>{Date.now()}</div> */}
-      <OptimisticButton
+      {/* <OptimisticButton
         isLiked={likeStatus.isLiked}
         likeCount={likeStatus.likeCount}
         setLikeStatus={setLikeStatus}
-      />
+      /> */}
     </div>
   );
 }

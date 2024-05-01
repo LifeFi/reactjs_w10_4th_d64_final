@@ -22,7 +22,7 @@ export default async function TweetDetail({
 
   return (
     <div className="flex flex-col item-center py-4 gap-4">
-      <div className="flex justify-center w-full h-7">{Date.now()}</div>
+      <div className="flex justify-center w-full h-7">{/* {Date.now()} */}</div>
       <TweetItem
         tweet={tweet}
         user={user}
