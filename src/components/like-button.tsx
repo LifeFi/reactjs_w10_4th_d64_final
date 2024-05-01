@@ -1,9 +1,16 @@
 "use client";
 
-import { Dispatch, SetStateAction, useOptimistic, useTransition } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useOptimistic,
+  useRef,
+  useTransition,
+} from "react";
 import { dislikeTweet, likeTweet } from "@/app/(tabs)/tweets/actions";
 import { HeartIcon as SolidHeartIcon } from "@heroicons/react/24/solid";
 import { HeartIcon as OutlineHeartIcon } from "@heroicons/react/24/outline";
+import { createKey } from "next/dist/shared/lib/router/router";
 
 interface LikeButtonProps {
   isLiked: boolean;
@@ -26,53 +33,60 @@ export default function LikeButton({
   tweetId,
   setLikeState,
 }: LikeButtonProps) {
-  const [isPending, startTransition] = useTransition();
   const [state, reducerFn] = useOptimistic(
     { isLiked, likeCount },
-    (previousState, payload) => ({
-      isLiked: !previousState.isLiked,
-      likeCount: previousState.isLiked
-        ? previousState.likeCount - 1
-        : previousState.likeCount + 1,
-    })
+    (previousState, payload) => {
+      return {
+        isLiked: !previousState.isLiked,
+        likeCount: previousState.isLiked
+          ? previousState.likeCount - 1
+          : previousState.likeCount + 1,
+      };
+    }
   );
 
-  const onClick = async () => {
-    // console.log("likeButton start");
-    // console.log("state before reduverFn: ", state);
+  const toggleAction = async () => {
+    console.log("likeButton start");
 
-    // reducerFn(undefined);
-    startTransition(() => reducerFn(undefined));
-    console.log("state after reduverFn: ", state);
+    reducerFn(undefined);
+
+    if (setLikeState) {
+      setLikeState((prev) => {
+        console.log("prev setLikeState ( after await ): ", prev);
+        return {
+          isLiked: !prev.isLiked,
+          likeCount: prev.isLiked ? prev.likeCount - 1 : prev.likeCount + 1,
+        };
+      });
+    }
     if (isLiked) {
       await dislikeTweet(tweetId);
     } else {
       await likeTweet(tweetId);
     }
-    if (setLikeState) {
-      setLikeState((previousState) => ({
-        isLiked: !previousState.isLiked,
-        likeCount: previousState.isLiked
-          ? previousState.likeCount - 1
-          : previousState.likeCount + 1,
-      }));
-    }
+    console.log("like/dislike fetch end!!!!");
+
+    // setTriggerNubmer && setTriggerNubmer((prev) => prev + 1);
+    // clikcedNumberRef.current = 0;
+    // isLoadingRef.current = false;
+
     console.log("likeButton end");
   };
   return (
     <div className="flex items-center justify-start">
-      <button
-        onClick={onClick}
-        className={`size-10 flex items-center justify-center gap-2 text-neutral-400 text-sm rounded-full p-1 transition ${
-          state.isLiked ? "text-red-500" : "hover:bg-red-100"
-        }`}
-      >
-        {state.isLiked ? (
-          <SolidHeartIcon className="size-7 animate-appear" />
-        ) : (
-          <OutlineHeartIcon className="size-7 " />
-        )}
-      </button>
+      <form action={toggleAction}>
+        <button
+          className={`size-10 flex items-center justify-center gap-2 text-neutral-400 text-sm rounded-full p-1 transition ${
+            state.isLiked ? "text-red-500" : "hover:bg-red-100"
+          }`}
+        >
+          {state.isLiked ? (
+            <SolidHeartIcon className="size-7 animate-appear" />
+          ) : (
+            <OutlineHeartIcon className="size-7 " />
+          )}
+        </button>
+      </form>
       <span className="text-neutral-500"> {state.likeCount}</span>
     </div>
   );

@@ -1,14 +1,8 @@
 import NotFound from "@/app/not-found";
 import AvatarCircle from "@/components/avatar-circle";
-import LikeComponent from "@/components/like-client-component";
-import {
-  ChatBubbleOvalLeftIcon,
-  EllipsisHorizontalIcon,
-} from "@heroicons/react/24/outline";
 import { PhotoIcon } from "@heroicons/react/24/solid";
-import Image from "next/image";
 import Link from "next/link";
-import { getCachedTweet, getReplies, getTweet } from "./actions";
+import { getCachedTweet, getReplies } from "./actions";
 import { getUser } from "@/app/(tabs)/profile/[id]/[[...slug]]/actions";
 import TweetItem from "@/components/tweet-item";
 
@@ -24,10 +18,11 @@ export default async function TweetDetail({
   const tweet = await getCachedTweet(id);
   const replies = await getReplies(id);
   const user = await getUser();
+  console.log("@server | tweet: ", tweet.id, " ============ ");
 
   return (
     <div className="flex flex-col item-center py-4 gap-4">
-      <div className="flex justify-center w-full h-7"></div>
+      <div className="flex justify-center w-full h-7">{Date.now()}</div>
       <TweetItem
         tweet={tweet}
         user={user}

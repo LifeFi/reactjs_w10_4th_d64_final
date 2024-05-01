@@ -1,3 +1,5 @@
+"use client";
+
 import { User } from "@prisma/client";
 import Link from "next/link";
 import AvatarCircle from "./avatar-circle";
@@ -63,7 +65,7 @@ export default function TweetItem({
             ) : (
               <>
                 <Link href={`/tweets/${tweet.id}`} className="hover:underline">
-                  <span className="flex w-full min-h-10 whitespace-pre-wrap">
+                  <span className="flex w-full min-h-10 whitespace-pre-wrap px-1">
                     {tweet.content}
                   </span>
                   <div className="flex overflow-x-scroll gap-1 transition mt-2 px-2">
@@ -82,9 +84,9 @@ export default function TweetItem({
                     )}
                   </div>
                 </Link>
-                <div className="grid grid-cols-5 mt-1 mb-3 *:flex *:items-center *:text-neutral-400">
-                  <Link href={`/tweets/${tweet.id}/add`}>
-                    <ChatBubbleOvalLeftIcon className="size-9 text-sm cursor-pointer rounded-full p-1 hover:bg-blue-100 transition" />
+                <div className="grid grid-cols-5 pb-2 file:*:flex *:items-center *:text-neutral-400">
+                  <Link href={`/tweets/${tweet.id}/add`} className="flex">
+                    <ChatBubbleOvalLeftIcon className="size-10 text-sm cursor-pointer rounded-full p-1 hover:bg-blue-100 transition" />
                     <span className="mx-1">
                       {tweet.parentTweetId
                         ? tweet._count.inReplies

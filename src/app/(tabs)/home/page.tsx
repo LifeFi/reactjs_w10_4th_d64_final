@@ -16,7 +16,7 @@ import logoImg from "/public/ox-logo.png";
 export default async function Home() {
   const initialTweets = await getMoreTweets(0, { filter: "parents" });
   const user = await getUser();
-  console.log(initialTweets);
+  // console.log(initialTweets);
   return (
     <>
       <div className="flex flex-col item-center py-4 gap-4">

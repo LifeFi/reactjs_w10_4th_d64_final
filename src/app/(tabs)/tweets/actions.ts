@@ -16,10 +16,10 @@ export async function likeTweet(tweetId: number) {
     });
     console.log("likeTweet");
 
-    revalidateTag(`tweet-like-status-${tweetId}-${session.id!}`);
+    revalidateTag(`tweet-like-status-${tweetId}`);
   } catch (e) {
     console.log("likeTweet Error");
-    revalidateTag(`tweet-like-status-${tweetId}-${session.id!}`);
+    revalidateTag(`tweet-like-status-${tweetId}`);
   }
 }
 
@@ -36,10 +36,10 @@ export async function dislikeTweet(tweetId: number) {
       },
     });
     console.log("dislikeTweet");
-    revalidateTag(`tweet-like-status-${tweetId}-${session.id!}`);
+    revalidateTag(`tweet-like-status-${tweetId}`);
   } catch (e) {
     console.log("dislikeTweet Error");
-    revalidateTag(`tweet-like-status-${tweetId}-${session.id!}`);
+    revalidateTag(`tweet-like-status-${tweetId}`);
   }
 }
 
@@ -59,7 +59,7 @@ export async function getLikeStatus(tweetId: number, userId: number) {
       tweetId,
     },
   });
-  console.log(likeCount, isLiked);
+  console.log("getLikeStatus: ", likeCount, isLiked);
   return {
     likeCount,
     isLiked: Boolean(isLiked),

@@ -1,5 +1,6 @@
 import { getCachedLikeStatus } from "@/app/(tabs)/tweets/actions";
 import LikeButton from "@/components/like-button";
+import getSession from "@/lib/session";
 
 export default async function LikeComponent({
   tweetId,

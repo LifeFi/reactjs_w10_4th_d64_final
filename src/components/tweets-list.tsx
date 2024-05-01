@@ -7,7 +7,7 @@ import {
 import useUser from "@/lib/useUser";
 import { useEffect, useRef, useState } from "react";
 import LoadingTweetSkeleton from "./loading-tweet-skeleton";
-import Tweet from "./tweet-item";
+import TweetItem from "./tweet-item";
 
 interface TweetsProps {
   initialTweets: InitialTweets;
@@ -71,7 +71,7 @@ export default function TweetsList({
   return (
     <div className="flex flex-col mb-20">
       {tweets.map((tweet, index, array) => (
-        <Tweet
+        <TweetItem
           key={tweet.id}
           tweet={tweet}
           user={user}

@@ -1,6 +1,5 @@
 "use server";
 
-import { tweetSchema } from "@/app/(tabs)/tweets/add/components/schema";
 import db from "@/lib/db";
 import { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
