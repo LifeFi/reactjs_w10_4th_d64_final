@@ -12,17 +12,52 @@ import LikeComponent from "./like-client-component";
 import { TweetWithUser } from "@/app/(tabs)/tweets/[id]/actions";
 import { formatDate } from "@/lib/utils";
 
+export interface TweetItemProps {
+  tweet: TweetWithUser;
+  user?: User;
+  displayMode?: "list" | "detail" | "reply";
+  verticalLine?: boolean;
+}
+
+export const RegisterEmptyTweet: TweetItemProps = {
+  tweet: {
+    id: 0,
+    content: "",
+    photos: null,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    user: {
+      id: 0,
+      username: "",
+      avatar: "",
+    },
+    _count: {
+      replies: 0,
+      inReplies: 0,
+    },
+    userId: 0,
+    parentTweetId: null,
+    inReplyToTweetId: null,
+  },
+  user: {
+    id: 0,
+    username: "",
+    email: "",
+    avatar: null,
+    cover: null,
+    bio: null,
+    password: null,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+};
+
 export default function TweetItem({
   tweet,
   user,
   displayMode = "list",
   verticalLine = false,
-}: {
-  tweet: TweetWithUser;
-  user?: User;
-  displayMode?: "list" | "detail" | "reply";
-  verticalLine?: boolean;
-}) {
+}: TweetItemProps) {
   return (
     <div
       className={`pt-3 last:border-none trantition hover:bg-neutral-100 
